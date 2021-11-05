@@ -1,7 +1,7 @@
 import { Hamster } from '../../models/Hamster'
-import  hamsters  from '../../atoms/hamsters'
+// import  hamsters  from '../../atoms/hamsters'
 import { useEffect, useState } from 'react'
-import { useRecoilState } from 'recoil'
+// import { useRecoilState } from 'recoil'
 
 
 const HamsterGallery = () => {
@@ -24,10 +24,13 @@ const HamsterGallery = () => {
                
                { ourHamster?
                ourHamster.map( hamster => (
-                <div key={ hamster.id } className="galleryCard">
-                    <img src={`/img/${hamster.imgName}`} alt='img'/>
-                    <br/>
-                    <p>{hamster.name}</p>
+                <div key={ hamster.id } >
+                   <section className="galleryCard">
+                        <img src={`/img/${hamster.imgName}`} alt='img'/>
+                        <br/>
+                        <p>{hamster.name}</p>
+                        <button>Remove</button>
+                    </section>
                 </div>
                ))
                
@@ -38,7 +41,7 @@ const HamsterGallery = () => {
     )
          
     async function getHamsters(allHamsters:any){
-        const url = 'http://localhost:1337/hamsters'
+        const url = 'http://localhost:1331/hamsters' // 'https://hamster-original.herokuapp.com/hamsters'                      
         const response = await fetch(url)
         const data = await response.json()
         allHamsters(data)

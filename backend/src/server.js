@@ -10,7 +10,7 @@ const hamsters = require('./data.json')
 // konfig. server
 
 const app = express()
-const PORT = process.env.PORT || 1337
+const PORT = process.env.PORT || 1331
 const cors = require('cors')
 const path = require('path')
 const staticFolder = path.join(__dirname, 'public')
@@ -34,7 +34,7 @@ app.use('/', express.static(staticFolder))
 // set-up routes
 app.use('/hamsters', hamstersRouter)
 
-app.use('/img', express.static(__dirname + '../public/hamsters/')) 
+app.use('/img', express.static(path.resolve('backend/public/hamsters/'))) 
 
 // app.use( '/img', express.static(path.resolve('hamsters/') ));
 
@@ -48,7 +48,17 @@ app.listen(PORT, () => {
 })
 */
 
+
+ 
 app.get('/', (req, res) => {
     console.log('Web root')
     res.send('The server is deployed')
 })
+ 
+
+app.use( express.static(path.resolve('build/') ));
+
+app.get('*', (req, res) => {
+    console.log('* is being called...')
+    res.sendFile(path.resolve('build/index.html'));
+});
