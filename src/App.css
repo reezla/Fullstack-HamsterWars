@@ -15,7 +15,7 @@
   display: flex;
   padding: 0em 2em 0.2em 2em;
   background-color: antiquewhite;
-  
+  flex-grow: 1;
   
   border-radius: 10px 10px 30px 30px;
   
@@ -75,4 +75,22 @@ main {
 
 Link {
   align-items: flex-end;
+}
+
+.gallery {
+  background-color: salmon;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  grid-gap:2em;
+  list-style-type: none;
+  height: 50px;
+  width: 50px;
+  margin-top: 25vh;
+
+}
+
+.galleryCard {
+  width:50px;
+  height: 50px;
 }

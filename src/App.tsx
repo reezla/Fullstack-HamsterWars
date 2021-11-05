@@ -3,6 +3,7 @@ import { Link, Route, Switch } from 'react-router-dom'
 import './App.css';
 import Start from './components/Start/Start'
 import Play from './components/Play/Play'
+import HamsterGallery from './components/Gallery/HamsterGallery'
 
 function App() {
   return (
@@ -25,17 +26,8 @@ function App() {
           <Switch>
             <Route path="/" exact><Start/></Route>
             <Route path="/play"><Play/></Route>
-            <Route path="/gallery" ></Route>
+            <Route path="/gallery" ><HamsterGallery/></Route>
           </Switch>
-
-
-
-
-          
-
-          <div>
-            TODO: Display hamster that won the most games.
-          </div>
         </main>
         <footer>
 
