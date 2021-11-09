@@ -1,12 +1,16 @@
 import { Hamster } from '../../models/Hamster'
-// import  hamsters  from '../../atoms/hamsters'
 import { useEffect, useState } from 'react'
+import AddHamsters from './AddHamster'
+
+// import hamsters from '../../atoms/hamsters'
+
 // import { useRecoilState } from 'recoil'
 
 
 const HamsterGallery = () => {
 
     const [ ourHamster, setOurHamster ] = useState<null | Hamster[]>(null)
+
 
     useEffect(() => {
         async function send() {
@@ -17,19 +21,46 @@ const HamsterGallery = () => {
     }, [])
 
 
+    // remove one hamster from the list
+    const removeHamster = (id: string ): void => {       // funkcija gde uzimamo (id) i radimo nesto sa tim
+
+        const newList = ourHamster? ourHamster.filter( hamster => hamster.id !== id) : null
+        setOurHamster(newList)
+    }          
+    
+
+    // add new hamster to the list 
+     /*
+    const addHamster = ( 
+        name:string, 
+        age: number, 
+        favFood: string): void => {
+
+        const newHamster = { name, age, favFood  }
+        const newHamsterArray = [ (...addOurHamster):Hamster ] =>
+         setOurHamster(newHamsterArray) 
+    }
+*/
+
+
     console.log('this is:', ourHamster)
     return (
         <div>
+             <AddHamsters/>
             < section className="gallery"> 
-               
+              
+
                { ourHamster?
                ourHamster.map( hamster => (
                 <div key={ hamster.id } >
                    <section className="galleryCard">
-                        <img src={`/img/${hamster.imgName}`} alt='img'/>
+                        <img 
+                            src={`/img/${hamster.imgName}`} 
+                            alt={hamster.name} 
+                            key={hamster.id}/>
                         <br/>
                         <p>{hamster.name}</p>
-                        <button>Remove</button>
+                        <button onClick={() => removeHamster(hamster.id)}>Remove</button>
                     </section>
                 </div>
                ))

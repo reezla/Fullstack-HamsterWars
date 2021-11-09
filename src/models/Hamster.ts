@@ -1,6 +1,5 @@
 
 export interface Hamster {
-    map(arg0: (hamster: Hamster) => JSX.Element): import("react").ReactNode;
     id: string;
     name: string;
     age: number;
@@ -11,3 +10,18 @@ export interface Hamster {
     loves: string;
     imgName: string;
 }
+
+
+/*
+interface NewHamster {
+
+    name: string;
+    age: number;
+
+
+    favFood: string;
+    
+    loves: string;
+    imgName: string;
+}
+*/
