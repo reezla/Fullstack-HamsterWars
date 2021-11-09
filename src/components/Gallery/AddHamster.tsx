@@ -50,14 +50,14 @@ const AddHamsters = () => {
 
     return (
         <>
-            <form >
+           
                 <input type="text" placeholder="Hamster name" value={newHamsterName} onChange={handleNameChange} />
                 <input type="number" placeholder="Age" value={newHamsterAge} onChange={handleAgeChange} />
                 <input type="text" placeholder="Food" value={newHamsterFavFood} onChange={handleFavFoodChange} />
                 <input type="text" placeholder="Loves" value={newHamsterLoves} onChange={handleLovesChange} />
                 <input type="text" placeholder="Picture" value={newHamsterImgName} onChange={handleImgNameChange} />
-                <button type="submit" onClick={() => newHamster()}> add </button>
-            </form>
+                <button onClick={() => newHamster()}> add </button>
+           
         </>
     )
     

@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom"
-
+import CutestHamster from "./CutestHamster"
 
 const Start = () => (
+
+   
+
 
     <div>
         <p> The game is simple - click on the hamster you think is cuter.
@@ -10,17 +13,15 @@ const Start = () => (
         </p>
         <h3>This one is the cutest hamster at the moment</h3>
         <div className="winner">
-            
-            <ul className="winnerStats">
-                <li>
-
-                </li>
-            </ul>
+            <CutestHamster/>
         </div>
 
 
 
     </div>
+
+
+
 )
 
 export default Start

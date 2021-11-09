@@ -23,37 +23,23 @@ const HamsterGallery = () => {
 
     // remove one hamster from the list
     const removeHamster = (id: string ): void => {       // funkcija gde uzimamo (id) i radimo nesto sa tim
-
         const newList = ourHamster? ourHamster.filter( hamster => hamster.id !== id) : null
         setOurHamster(newList)
     }          
     
 
-    // add new hamster to the list 
-     /*
-    const addHamster = ( 
-        name:string, 
-        age: number, 
-        favFood: string): void => {
-
-        const newHamster = { name, age, favFood  }
-        const newHamsterArray = [ (...addOurHamster):Hamster ] =>
-         setOurHamster(newHamsterArray) 
-    }
-*/
-
-
     console.log('this is:', ourHamster)
     return (
         <div>
              <AddHamsters/>
-            < section className="gallery"> 
+            < section className="gallery" > 
+              
               
 
                { ourHamster?
                ourHamster.map( hamster => (
-                <div key={ hamster.id } >
-                   <section className="galleryCard">
+             
+                   <section key={ hamster.id } className="galleryCard">
                         <img 
                             src={`/img/${hamster.imgName}`} 
                             alt={hamster.name} 
@@ -62,11 +48,11 @@ const HamsterGallery = () => {
                         <p>{hamster.name}</p>
                         <button onClick={() => removeHamster(hamster.id)}>Remove</button>
                     </section>
-                </div>
+               
                ))
                
                : 'Where are they'}
-
+              
             </section>
         </div>
     )
@@ -76,11 +62,6 @@ const HamsterGallery = () => {
         const response = await fetch(url)
         const data = await response.json()
         allHamsters(data)
-        
-        
-
-        
-        
     }
 
 }

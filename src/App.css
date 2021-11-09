@@ -1,6 +1,7 @@
 .App {
   padding: 0em 2em;
   align-items: center;
+  width: 100%;
   
 }
 
@@ -63,6 +64,8 @@ li {
 }
 
 main {
+  width: 100%;
+  margin: auto;
   text-align: center;
 }
 
@@ -77,20 +80,29 @@ Link {
   align-items: flex-end;
 }
 
+
+
+
 .gallery {
-  background-color: salmon;
+  
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(1, 1fr);
   grid-gap:2em;
   list-style-type: none;
   height: 50px;
-  width: 50px;
-  margin-top: 25vh;
+  width: auto;
+  margin-top: 5vh;
 
 }
 
 .galleryCard {
+ padding-top: 2em;
  background-color:lightgreen;
  
+}
+
+.galleryCard img {
+  width: auto;
+  height: 10em;
 }
