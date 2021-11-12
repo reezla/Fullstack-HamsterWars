@@ -23,10 +23,17 @@ const HamsterGallery = () => {
 
     // remove one hamster from the list
     const removeHamster = (id: string ): void => {       // funkcija gde uzimamo (id) i radimo nesto sa tim
-        const newList = ourHamster? ourHamster.filter( hamster => hamster.id !== id) : null
-        setOurHamster(newList)
-    }          
-    
+            const newList = ourHamster? ourHamster.filter( hamster => hamster.id !== id) : null
+            setOurHamster(newList) 
+            removeFromDb(id)
+        }      
+
+     async function removeFromDb(id:any) {
+            await fetch(`/hamsters/${id}`, {
+                method: 'delete',
+                headers: { "Content-Type": "application/json" },
+            });
+    }
 
     console.log('this is:', ourHamster)
     return (
