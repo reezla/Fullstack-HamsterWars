@@ -49,6 +49,10 @@ a:hover {
 
 h1 {
   text-align: center;
+  font-family: monospace;
+  color: lightblue;
+  font-size: 3em;
+  margin: 0.2em 0;
 }
 
 li {
@@ -57,7 +61,7 @@ li {
   
 }
 
-.playButton {
+.playButton, .startButton {
   font-size: 1.5em;
   margin: auto;
   color: #2678C0;
@@ -71,9 +75,9 @@ main {
 
 .battleWrapper {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
 }
 
 
@@ -100,7 +104,7 @@ Link {
 
 .galleryCard {
  padding-top: 2em;
- background-color:lightgreen;
+ background-color:lightblue;
  
 }
 

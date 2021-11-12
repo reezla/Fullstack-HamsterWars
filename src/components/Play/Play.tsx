@@ -1,6 +1,16 @@
 import { useEffect, useState } from "react"
 import { Hamster } from "../../models/Hamster"
 
+
+export  const imgStyle = {
+    width:'15em',
+    height:'auto',
+    margin: 'auto',
+    boxShadow: '0px 10px 20px 20px #DBDADA',
+    borderRadius: '25px 60px',
+  };
+
+
 const Play = () => {
 
 const [ players, setPlayers ] = useState<null | Hamster[]>(null)
@@ -75,6 +85,7 @@ const playGame = () => {
 const handleClick = (a:Hamster, b:Hamster) => {
     looserStats(b)
     winnerStats(a)
+    
 }
 
 console.log(players)
@@ -87,7 +98,9 @@ return (
             <h3>And the winner is</h3>
             <br></br>
             <h2 >{winner?.name}</h2>
-            <h2 >He has played {winner?.games} games so far and won {winner?.wins}</h2>
+            <img style={imgStyle} src={`/img/${winner.imgName}`} alt={winner.imgName}/>
+            <h2 >He has played {winner?.games} games so far and won {winner?.wins}.</h2>
+            <h2>This guy lost its charm {winner?.defeats} times.</h2>
 
             <button className="startButton" onClick={() => playGame()}>New Match</button> 
             </>:<>
@@ -103,7 +116,7 @@ return (
                     players.map(x => (
                         
                         <article onClick={!showResult? () => handleClick(x, players?.filter(l=>l!==x)[0]): undefined} key={x.id} >
-                            <li><img src={x.imgName.includes('http') ? x.imgName : `/img/${x.imgName}`} alt={x.name} /></li>
+                            <li><img style={imgStyle} src={x.imgName.includes('http') ? x.imgName : `/img/${x.imgName}`} alt={x.name} /></li>
                             <h2 >{x.name}</h2>
                         </article>
                     )) 
