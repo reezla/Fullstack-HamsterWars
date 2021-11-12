@@ -8,7 +8,8 @@ import HamsterGallery from './components/Gallery/HamsterGallery'
 function App() {
   return (
     <div className="App">
-      <div className="wrapper"><header>
+      <div className="wrapper">
+        <header>
           
           <nav>
             <h1>Hamster Wars</h1>

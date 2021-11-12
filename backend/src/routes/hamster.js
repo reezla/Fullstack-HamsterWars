@@ -59,6 +59,7 @@ router.post('/', async (req, res) => {			//
 router.put('/:id', async (req, res) => { 		// put - changes object of specific humster
 	let body = req.body
 	if (!changedHumster(body)){
+		console.log('body is not a changed object')
 		res.sendStatus(400);
 		return;
 	}
@@ -89,17 +90,19 @@ router.delete('/:id', async (req, res) => { 		// delete
 
 ////////////////////// f //////////////////////
 
-function changedHumster(body) {            			// handling PUT object
+function changedHumster(body) {    
+	console.log('changedHumster1')        			// handling PUT object
 	if (typeof body !== "object") {
 		console.log(typeof body);
 		return false
 	}
-
+	console.log('changedHumster2') 
 	let keys = Object.keys(body);
-	if (!keys.includes("wins") || !keys.includes("games")) {
-		return false;
-	}
-
+	// if (!keys.includes("wins") || !keys.includes("games")) {
+	// 	console.log('changedHumster3', keys) 
+	// 	return false;
+	// }
+	console.log('changedHumster4') 
 	return true;
 }
 

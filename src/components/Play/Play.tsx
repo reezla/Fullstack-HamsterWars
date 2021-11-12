@@ -7,15 +7,14 @@ const [ players, setPlayers ] = useState<null | Hamster[]>(null)
 const [ winner, setWinner ] = useState<null | Hamster>(null)
 const [ looser, setLooser ] = useState<null | Hamster>(null)
 const [ showResult, setShowResult ] = useState<boolean>(false)
-const urlH = 'http://localhost:1337'
+
 
 useEffect(() => {
-    
     getPlayers(setPlayers)
 }, [])
 
 async function getPlayers(saveData:any) {
-    const url = 'http://localhost:1337/hamsters/random/' 
+    const url = '/hamsters/random/' 
     const response = await fetch(url)
     const playerOne = await response.json()
     let response2 = await fetch(url)
@@ -32,9 +31,9 @@ async function getPlayers(saveData:any) {
 
 
 
-const winnerStats = async(a:Hamster) => {
+const winnerStats = (a:Hamster) => {
 
-    await fetch(`/hamsters/` + a.id, { 
+    fetch(`/hamsters/` + a.id, { 
         method: 'put',
         body: JSON.stringify({ wins: a.wins+1, games: a.games+1}),
         headers: {
@@ -44,9 +43,9 @@ const winnerStats = async(a:Hamster) => {
     setWinner(a)
 }
 
-const looserStats = async(b:Hamster) => {
+const looserStats = (b:Hamster) => {
    
-    await fetch(`/hamsters/` + b.id, { 
+    fetch(`/hamsters/` + b.id, { 
         method: 'put',
         body: JSON.stringify({ defeats: b.defeats+1, games: b.games+1}),
         headers: {
@@ -67,19 +66,15 @@ const looserStats = async(b:Hamster) => {
 }*/
 
 const playGame = () => {
-    
-
     getPlayers(setPlayers)
     setWinner(null)
     setLooser(null)
     
 }
 
-const handleClick = async(a:Hamster, b:Hamster) => {
-    await looserStats(b)
-    await winnerStats(a)
-   // setDoneLoadingUpdate(true)
-   // await updateStats(a, b)
+const handleClick = (a:Hamster, b:Hamster) => {
+    looserStats(b)
+    winnerStats(a)
 }
 
 console.log(players)
