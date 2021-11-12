@@ -1,19 +1,167 @@
+import { useEffect, useState } from "react"
+import { Hamster } from "../../models/Hamster"
 
-const Play = () => (
-    <div>
-        <p>Which hamster wins this contest?</p>
-        
-        <div className="battleWrapper">
-            <figure>
-                HAMSTER 1
-            </figure>
-            <figure>
-                HAMSTER 2
-            </figure>
+const Play = () => {
 
-        </div>
-    </div>
+const [ players, setPlayers ] = useState<null | Hamster[]>(null)
+const [ winner, setWinner ] = useState<null | Hamster>(null)
+const [ looser, setLooser ] = useState<null | Hamster>(null)
+const [ showResult, setShowResult ] = useState<boolean>(false)
+const urlH = 'http://localhost:1337'
 
+useEffect(() => {
+    
+    getPlayers(setPlayers)
+}, [])
+
+async function getPlayers(saveData:any) {
+    const url = 'http://localhost:1337/hamsters/random/' 
+    const response = await fetch(url)
+    const playerOne = await response.json()
+    let response2 = await fetch(url)
+    let playerTwo = await response2.json()
+    
+
+    while ( playerOne.id === playerTwo.id) {
+        response2 = await fetch(url)
+        playerTwo = await response2.json()
+    }
+    saveData([playerOne, playerTwo])
+} 
+
+
+
+
+const winnerStats = async(a:Hamster) => {
+
+    await fetch(`/hamsters/` + a.id, { 
+        method: 'put',
+        body: JSON.stringify({ wins: a.wins+1, games: a.games+1}),
+        headers: {
+            "Content-type": "application/json"
+        }
+    })
+    setWinner(a)
+}
+
+const looserStats = async(b:Hamster) => {
+   
+    await fetch(`/hamsters/` + b.id, { 
+        method: 'put',
+        body: JSON.stringify({ defeats: b.defeats+1, games: b.games+1}),
+        headers: {
+            "Content-type": "application/json"
+        }
+    })
+    setLooser(b)
+}
+/*
+  const updateStats = async(winner:Hamster, looser:Hamster) => {
+    await fetch(`${url}/matches/`, {
+        method: 'post', 
+        body:JSON.stringify({ winnerId: winner.id, looserId: looser.id}),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+}*/
+
+const playGame = () => {
+    
+
+    getPlayers(setPlayers)
+    setWinner(null)
+    setLooser(null)
+    
+}
+
+const handleClick = async(a:Hamster, b:Hamster) => {
+    await looserStats(b)
+    await winnerStats(a)
+   // setDoneLoadingUpdate(true)
+   // await updateStats(a, b)
+}
+
+console.log(players)
+
+
+return (
+    <section className='battleWrapper'>
+        { winner ? 
+            <>
+            <h3>And the winner is</h3>
+            <br></br>
+            <h2 >{winner?.name}</h2>
+            <h2 >He has played {winner?.games} games so far and won {winner?.wins}</h2>
+
+            <button className="startButton" onClick={() => playGame()}>New Match</button> 
+            </>:<>
+            <h2> Which hamster is cuter? </h2>
+            </> 
+        }
+        <section className='battleWrapper'>
+        { players ?
+            <>
+            {
+                !winner && !looser ? 
+                
+                    players.map(x => (
+                        
+                        <article onClick={!showResult? () => handleClick(x, players?.filter(l=>l!==x)[0]): undefined} key={x.id} >
+                            <li><img src={x.imgName.includes('http') ? x.imgName : `/img/${x.imgName}`} alt={x.name} /></li>
+                            <h2 >{x.name}</h2>
+                        </article>
+                    )) 
+                : null
+            }
+           
+            </>
+            : 'Loading Hamsters ...'		
+        }
+        </section>
+    </section>
 )
+    
+
+/*
+async function resolvePUT(winner:Hamster) {
+    if (winner.id === winner.id) {
+        console.log('resolvePUT', winner)
+        await fetch(`http://localhost:1337/hamsters/${winner.id}`, {
+            method: 'PUT',
+            body: JSON.stringify({wins: winner.wins + 1, games: winner.games + 1}),
+            headers: {'Content-Type': 'application/json'}
+        });
+
+        await fetch(`http://localhost:1337/hamsters/${looser?.id}`, {
+            method: 'PUT',
+            body: JSON.stringify({ defeats: looser!.defeats + 1, games: looser!.games + 1}),
+            headers: { 'Content-Type': 'application/json '}
+        });
+    }
+}
+*/
+
+
+}
 
 export default Play
+
+  /* 
+   
+        {  players?
+            players.map( x => (
+                <article  key={x.id} onClick={ playGame }>
+                       
+                    <div  style={{padding: 2}} >{x.name} </div>
+                    <img src={`${url}/img/${x.imgName}`} 
+                    style={{padding: 10}}
+                    alt={x.name} 
+                    key={x.id}/>    
+                    
+                </article>
+            ))
+                : 'looking for our contestentes'
+
+            }
+  */

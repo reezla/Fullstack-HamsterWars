@@ -58,7 +58,7 @@ const HamsterGallery = () => {
     )
          
     async function getHamsters(allHamsters:any){
-        const url = 'http://localhost:1331/hamsters' // 'https://hamster-original.herokuapp.com/hamsters'                      
+        const url = 'http://localhost:1337/hamsters' // 'https://hamster-original.herokuapp.com/hamsters'                      
         const response = await fetch(url)
         const data = await response.json()
         allHamsters(data)

@@ -71,10 +71,12 @@ main {
 
 .battleWrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   
 }
+
+
 
 Link {
   align-items: flex-end;
@@ -102,7 +104,13 @@ Link {
  
 }
 
-.galleryCard img {
+.galleryCard img, .battleWrapper li img {
   width: auto;
   height: 10em;
+}
+
+.startButton { 
+  margin: auto;
+  width: 5em;
+;
 }
