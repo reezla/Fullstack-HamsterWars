@@ -18,6 +18,7 @@ const staticFolder = path.join(__dirname, 'public')
 
 // install middleware
 app.use( cors())
+app.use(express.static(__dirname + '/build'))
 
 app.use((req, res, next) => {
     console.log(`${req.method} ${req.url}`);
@@ -50,15 +51,15 @@ app.listen(PORT, () => {
 
 
  
-app.get('/', (req, res) => {
-    console.log('Web root')
-    res.send('The server is deployed')
-})
+// app.get('/', (req, res) => {
+//     console.log('Web root')
+//     res.send('The server is deployed')
+// })
  
 
 app.use( express.static(path.resolve('build/') ));
 
 app.get('*', (req, res) => {
     console.log('* is being called...')
-    res.sendFile(path.resolve('build/index.html'));
+    res.send(__dirname + '/build/index.html');
 });
