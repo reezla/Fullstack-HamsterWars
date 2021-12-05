@@ -65,7 +65,7 @@ const HamsterGallery = () => {
     )
          
     async function getHamsters(allHamsters:any){
-        const url = 'https://hamster-original.herokuapp.com/hamsters'                      
+        const url = 'https://full-stack-hamster-wars.herokuapp.com//hamsters'                      
         const response = await fetch(url)
         const data = await response.json()
         allHamsters(data)
