@@ -53,13 +53,13 @@ return (
 
 async function getCutest(theCutestHamster:any){
    try { 
-    const url = 'http://localhost:1337/hamsters/cutest' // 'https://hamster-original.herokuapp.com/hamsters'                      
+    const url = 'https://hamster-original.herokuapp.com/hamsters'                   
     const response = await fetch(url)
     if (!response.ok) {
         throw new Error(response.statusText)
     } else {
         const data = await response.json()
-        theCutestHamster(data)
+        getCutest(data)
         
     }
 } catch (error) {

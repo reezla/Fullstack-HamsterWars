@@ -129,6 +129,10 @@ return (
         </section>
     </section>
 )
+
+}
+
+export default Play
     
 
 /*
@@ -150,10 +154,6 @@ async function resolvePUT(winner:Hamster) {
 }
 */
 
-
-}
-
-export default Play
 
   /* 
    
