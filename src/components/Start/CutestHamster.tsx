@@ -53,7 +53,7 @@ return (
 
 async function getCutest(theCutestHamster:any){
    try { 
-    const url = 'https://hamster-original.herokuapp.com/hamsters'                   
+    const url = ''                   
     const response = await fetch(url)
     if (!response.ok) {
         throw new Error(response.statusText)
