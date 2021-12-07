@@ -53,8 +53,9 @@ return (
 
 async function getCutest(theCutestHamster:any){
    try { 
-    const url = ''                   
+    const url = '/hamsters/cutest'                   
     const response = await fetch(url)
+    console.log('This is a cutest hamster')
     if (!response.ok) {
         throw new Error(response.statusText)
     } else {

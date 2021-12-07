@@ -65,8 +65,9 @@ const HamsterGallery = () => {
     )
          
     async function getHamsters(allHamsters:any){
-        const url = 'https://full-stack-hamster-wars.herokuapp.com//hamsters'                      
+        const url = '/hamsters'                   
         const response = await fetch(url)
+        console.log('fetchade')
         const data = await response.json()
         allHamsters(data)
     }
@@ -74,3 +75,10 @@ const HamsterGallery = () => {
 }
 
 export default HamsterGallery
+
+// ili samo '/hamsters'   u url
+
+/* menjani su samo url, nikakve funkcije. 
+Menjan je firebase-kod, proveri na heroku
+ da li i je i dalje isti, prvo lokalno probaj, 
+ posle push na heroku  */ 
