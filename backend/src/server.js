@@ -57,9 +57,9 @@ app.listen(PORT, () => {
 // })
  
 
-app.use( express.static(path.resolve('../build/') ));     //bilo je 'build/'
+app.use( express.static(path.resolve('build/') ));     //bilo je 'build/'
 
 app.get('*', (req, res) => {
     console.log('* is being called...')
-    res.send(__dirname + '../build/index.html');    // bilo je '/build/index.html'  &   '../../build'
+    res.sendFile(path.resolve('build/index.html'));     // res.send(__dirname + '/build/index.html');    // bilo je '/build/index.html'  &   '../../build'
 });
