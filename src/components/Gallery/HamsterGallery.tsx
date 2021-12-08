@@ -67,7 +67,7 @@ const HamsterGallery = () => {
     async function getHamsters(allHamsters:any){
         const url = '/hamsters'                   
         const response = await fetch(url)
-        console.log('fetchade')
+        console.log('got data')
         const data = await response.json()
         allHamsters(data)
     }

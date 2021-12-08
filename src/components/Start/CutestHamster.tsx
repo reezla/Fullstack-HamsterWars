@@ -5,8 +5,10 @@ import { Hamster } from '../../models/Hamster'
 const CutestHamster = () => {
 
 const [ cutestHamster, setCutestHamster ] = useState<null | Hamster[]>(null);
- 
-useEffect(() => {
+
+const [ errorIsThere, setErrorIsThere ] = useState<boolean>(false)
+
+useEffect(() => {                                             // ili probati useEffect(() => { sendRequest(setCutestHamster) 	}, [])
     async function send() {
         await getCutest(setCutestHamster)
     }
@@ -36,7 +38,7 @@ return (
                    key={hamster.id}/>
                <br/>
                <p>{hamster.name}</p>
-               <p>His score is: {`${hamster.wins - hamster.defeats}`} (wins - defeats) </p>
+               <p>His score is: {`${hamster.wins - hamster.defeats}`} (Final score = wins - defeats) </p>
            </section>
       
       ))
@@ -53,17 +55,22 @@ return (
 
 async function getCutest(theCutestHamster:any){
    try { 
-    const url = '/hamsters/cutest'                   
+    const url = '/hamsters/cutest'                   // proveriti da li je samo '/hamsters' prethodno je bilo '/hamsters/cutest' pa nije sljakalo, znaci to je nemoj da probas
     const response = await fetch(url)
     console.log('This is a cutest hamster')
     if (!response.ok) {
         throw new Error(response.statusText)
     } else {
+
         const data = await response.json()
-        getCutest(data)
+        theCutestHamster(data)                           // 7/12 je pisalo getCutest(data) isao je beskrajni loop, treba probati sa theCutestHamster (iz reda 54)
         
     }
 } catch (error) {
+
+
+    setErrorIsThere(true)
+
     console.log('There is an error:', error);
     
 }
