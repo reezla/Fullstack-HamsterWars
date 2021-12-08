@@ -18,7 +18,7 @@ const staticFolder = path.join(__dirname, 'public')
 
 // install middleware
 app.use( cors())
-app.use(express.static(__dirname + '/build'))
+app.use(express.static(__dirname + '../../build'))   //    bilo je '/build'
 
 app.use((req, res, next) => {
     console.log(`${req.method} ${req.url}`);
@@ -43,11 +43,11 @@ app.listen(PORT, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
 
-/* 
+
 app.listen(PORT, () => {
     console.log(`Server is listening on PORT ${PORT}`)
 })
-*/
+
 
 
  
@@ -61,5 +61,5 @@ app.use( express.static(path.resolve('build/') ));
 
 app.get('*', (req, res) => {
     console.log('* is being called...')
-    res.send(__dirname + '/build/index.html');
+    res.send(__dirname + '../../build/index.html');    // bilo je '/build/index.html'
 });
