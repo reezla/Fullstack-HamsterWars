@@ -57,7 +57,7 @@ app.listen(PORT, () => {
 // })
  
 
-// app.use( express.static(path.resolve('build/') ));     
+app.use( express.static(path.resolve('build/') ));     
 
 app.get('*', (req, res) => {
     console.log('* is being called...')
