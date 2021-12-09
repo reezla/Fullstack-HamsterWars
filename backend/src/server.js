@@ -56,6 +56,7 @@ app.listen(PORT, function(){
 //     res.send('The server is deployed')
 // })
 app.use('/gallery', express.static('build'));
+app.use('/play', express.static('build'));
 
 app.use( express.static(path.resolve('build/') ));     
 
