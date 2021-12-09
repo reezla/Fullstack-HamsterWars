@@ -18,7 +18,7 @@ const staticFolder = path.join(__dirname, 'public')
 
 // install middleware
 app.use( cors())
-app.use(express.static(__dirname + '/build'))   //    bilo je '/build'   &   '../../build'
+// app.use(express.static(__dirname + '/build'))   //    bilo je '/build'   &   '../../build'
 
 app.use((req, res, next) => {
     console.log(`${req.method} ${req.url}`);
