@@ -55,17 +55,17 @@ return (
 
 async function getCutest(theCutestHamster:any){
    try { 
-    const url = '/hamsters/cutest'                   // proveriti da li je samo '/hamsters' prethodno je bilo '/hamsters/cutest' pa nije sljakalo, znaci to je nemoj da probas
-    const response = await fetch(url)
-    console.log('This is a cutest hamster')
-    if (!response.ok) {
-        throw new Error(response.statusText)
-    } else {
+        const url = '/hamsters/cutest'                   
+        const response = await fetch(url)
+        console.log('This is a cutest hamster')
+        if (!response.ok) {
+            throw new Error(response.statusText)
+        } else {
 
-        const data = await response.json()
-        theCutestHamster(data)                           // 7/12 je pisalo getCutest(data) isao je beskrajni loop, treba probati sa theCutestHamster (iz reda 54)
-        
-    }
+            const data = await response.json()
+            theCutestHamster(data)                           
+            
+        }
 } catch (error) {
 
 
