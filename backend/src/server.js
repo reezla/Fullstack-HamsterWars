@@ -18,8 +18,7 @@ const staticFolder = path.join(__dirname, 'public')
 
 // install middleware
 app.use( cors())
-app.use(express.static(__dirname + '/build'))   //    bilo je '/build'   &   '../../build'
-
+app.use(express.static(__dirname + '/build'))  
 app.use((req, res, next) => {
     console.log(`${req.method} ${req.url}`);
     next()
@@ -27,17 +26,11 @@ app.use((req, res, next) => {
 
 app.use( express.urlencoded( { extended:true }) )
 app.use( express.json() )
-
-
 app.use('/', express.static(staticFolder)) 
-
-
 // set-up routes
 app.use('/hamsters', hamstersRouter)
 
 app.use('/img', express.static(path.resolve('backend/public/hamsters/'))) 
-
-// app.use( '/img', express.static(path.resolve('hamsters/') ));
 
 app.listen(PORT, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
@@ -49,18 +42,13 @@ app.listen(PORT, function(){
 // })
 
 
-
- 
-// app.get('/', (req, res) => {
-//     console.log('Web root')
-//     res.send('The server is deployed')
-// })
-app.use('/gallery', express.static('build'));
 app.use('/play', express.static('build'));
+
+app.use('/gallery', express.static('build'));
 
 app.use( express.static(path.resolve('build/') ));     
 
 app.get('*', (req, res) => {
     console.log('* is being called...')
-    res.send(__dirname + '/build/index.html');    // res.sendFile(path.resolve('build/index.html'));       // bilo je '/build/index.html'  &   '../../build'
+    res.send(__dirname + '/build/index.html');    
 });
