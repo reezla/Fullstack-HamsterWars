@@ -1,22 +1,18 @@
 import { Hamster } from '../../models/Hamster'
 import { useEffect, useState } from 'react'
 import AddHamsters from './AddHamster'
-
-// import hamsters from '../../atoms/hamsters'
-
-// import { useRecoilState } from 'recoil'
-
+import { Loader } from '../Loader'
 
 const HamsterGallery = () => {
 
     const [ ourHamster, setOurHamster ] = useState<null | Hamster[]>(null)
-
+    const [ loading, setLoading ] = useState<boolean>(true)
 
     useEffect(() => {
         async function send() {
            await getHamsters(setOurHamster)
+           setLoading(false)
         }
-        
         send()
     }, [])
 
@@ -35,32 +31,27 @@ const HamsterGallery = () => {
             });
     }
 
-    console.log('this is:', ourHamster)
     return (
         <div>
              <AddHamsters/>
-            < section className="gallery" > 
-              
-              
-
-               { ourHamster?
-               ourHamster.map( hamster => (
-             
-                   <section key={ hamster.id } className="galleryCard">
-                        <img 
-                            src={`/img/${hamster.imgName}`} 
-                            alt={hamster.name} 
-                            key={hamster.id}/>
-                        <br/>
-                        <p>{hamster.name}</p>
-                        <button onClick={() => removeHamster(hamster.id)}>Remove</button>
-                    </section>
-               
-               ))
-               
-               : 'Where are they'}
-              
-            </section>
+            { !loading ? 
+                < section className="gallery" > 
+                { ourHamster?
+                ourHamster.map( hamster => (
+                    <section key={ hamster.id } className="galleryCard">
+                            <img 
+                                src={`/img/${hamster.imgName}`} 
+                                alt={hamster.name} 
+                                key={hamster.id}/>
+                            <br/>
+                            <p>{hamster.name}</p>
+                            <div className="remove" onClick={() => removeHamster(hamster.id)}>
+                             Remove 
+                            </div>
+                        </section>
+                ))               : 'Where are they'}
+                </section> : <Loader/> 
+            }
         </div>
     )
          
@@ -71,7 +62,6 @@ const HamsterGallery = () => {
         const data = await response.json()
         allHamsters(data)
     }
-
 }
 
 export default HamsterGallery

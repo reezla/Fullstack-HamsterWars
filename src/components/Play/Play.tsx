@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Hamster } from "../../models/Hamster"
+import {Loader} from "../Loader";
 
 
 export  const imgStyle = {
@@ -17,6 +18,7 @@ const [ players, setPlayers ] = useState<null | Hamster[]>(null)
 const [ winner, setWinner ] = useState<null | Hamster>(null)
 const [ looser, setLooser ] = useState<null | Hamster>(null)
 const [ showResult, setShowResult ] = useState<boolean>(false)
+const [ loading, setLoading ] =useState<boolean>(false)
 
 
 useEffect(() => {
@@ -24,22 +26,25 @@ useEffect(() => {
 }, [])
 
 async function getPlayers(saveData:any) {
+    setLoading(true)
     const url = '/hamsters/random/' 
     const response = await fetch(url)
     const playerOne = await response.json()
     let response2 = await fetch(url)
     let playerTwo = await response2.json()
     
+    // if (!response || !response2) {
+    //      setLoading(true) }
+    //     else { setLoading(false) } 
+    // console.log("loading", loading)
 
     while ( playerOne.id === playerTwo.id) {
         response2 = await fetch(url)
         playerTwo = await response2.json()
     }
     saveData([playerOne, playerTwo])
+    setLoading(false)
 } 
-
-
-
 
 const winnerStats = (a:Hamster) => {
 
@@ -79,17 +84,12 @@ const playGame = () => {
     getPlayers(setPlayers)
     setWinner(null)
     setLooser(null)
-    
 }
 
 const handleClick = (a:Hamster, b:Hamster) => {
     looserStats(b)
     winnerStats(a)
-    
 }
-
-console.log(players)
-
 
 return (
     <section className='battleWrapper'>
@@ -108,7 +108,8 @@ return (
             </> 
         }
         <section className='battleWrapper'>
-        { players ?
+       { !loading ?
+        <> { players ?
             <>
             {
                 !winner && !looser ? 
@@ -124,8 +125,10 @@ return (
             }
            
             </>
-            : 'Loading Hamsters ...'		
-        }
+            : <Loader/>		
+        } 
+        
+        </> : <Loader/>}
         </section>
     </section>
 )
